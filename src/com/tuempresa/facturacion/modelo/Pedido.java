@@ -34,6 +34,14 @@ public class Pedido extends DocumentoComercial{
         if (getFecha().getDayOfWeek() == DayOfWeek.SATURDAY) return 3;
         return 1;
     }
+    
+    @Column(columnDefinition="INTEGER DEFAULT 1")
+    int diasEntrega;
+    
+    @PrePersist @PreUpdate 
+    private void recalcularDiasEntrega() {
+        setDiasEntrega(getDiasEntregaEstimados());
+    }
 	
 }
 
